@@ -7,7 +7,7 @@ on:
         required: false
         type: string
     secrets:
-      GITHUB_TOKEN:
+      ACCESS_TOKEN:
         required: true
       GIT_AUTHOR_NAME:
         required: true
@@ -47,7 +47,7 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACCESS_TOKEN }}
         branch: ${{ github.ref }}
         tags: true
   version_minor:
@@ -68,6 +68,6 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACCESS_TOKEN }}
         branch: ${{ github.ref }}
         tags: true
