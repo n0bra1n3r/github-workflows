@@ -2,6 +2,10 @@ name: Bumping
 
 on:
   workflow_call:
+    inputs:
+      type:
+        required: false
+        type: string
     secrets:
       GITHUB_TOKEN:
         required: true
@@ -26,7 +30,7 @@ env:
 
 jobs:
   version_patch:
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'bump patch')
+    if: (github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'bump patch')) || inputs.type == 'patch'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -47,7 +51,7 @@ jobs:
         branch: ${{ github.ref }}
         tags: true
   version_minor:
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'bump minor')
+    if: (github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'bump minor')) || inputs.type == 'minor'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
